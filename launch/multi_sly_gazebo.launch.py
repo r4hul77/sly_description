@@ -20,10 +20,10 @@ import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
-from launch.actions import IncludeLaunchDescription
+from launch.actions import IncludeLaunchDescription, OpaqueFunction
 from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration
+from launch.substitutions import LaunchConfiguration, LocalSubstitution, PathJoinSubstitution
 from launch_ros.actions import Node
 from launch.actions import ExecuteProcess
 from launch.substitutions import LaunchConfiguration, PythonExpression
@@ -87,6 +87,12 @@ def source_file(path):
         print(f"{key} : {os.environ[key]}")
     proc.communicate()
 
+def service_caller(context, *args, **kwargs):
+    print(kwargs)
+    robots_to_spawn = LaunchConfiguration("robots_to_spawn")
+    return config_to_service_caller(yaml_parser(robots_to_spawn.perform(context=context)))
+
+
 
 def generate_launch_description():
     source_file('/usr/share/gazebo/setup.bash')
@@ -102,6 +108,9 @@ def generate_launch_description():
 
 
     # RViz
+    rviz_arg = DeclareLaunchArgument('rviz', default_value='true',
+                              description='Open RViz.')
+
     rviz = Node(
         package='rviz2',
         executable='rviz2',
@@ -121,7 +130,12 @@ def generate_launch_description():
         arguments=[]
     )
 
-    cfg = os.path.join(pkg_skid_gazebo, 'cfg', 'single_robot.yaml')
+    #Getting CFG
+    
+    cfg_0 = os.path.join(pkg_skid_gazebo, 'cfg', 'three_robot.yaml')
+ 
+    robots_to_spawn = LaunchConfiguration('robots_to_spawn')
+    robots_to_spawn_arg = DeclareLaunchArgument('robots_to_spawn', default_value=cfg_0, description='Absolute Path to YAML File')
 
 
     return LaunchDescription([
@@ -129,13 +143,11 @@ def generate_launch_description():
           'world',
           default_value=[os.path.join(pkg_skid_gazebo, 'worlds', 'skid_steer_empty.world'), ''],
           description='SDF world file'),
-        DeclareLaunchArgument('robots_to_spawn_ag', default_value='Test'),  
-        DeclareLaunchArgument('rviz', default_value='true',
-                              description='Open RViz.'),
-                              
+        robots_to_spawn_arg,
+        rviz_arg,
         gazebo,
         rviz,
         rqt,
         rqt_reconfig
-    ]+ config_to_service_caller(yaml_parser(cfg)))
-PythonExpression
+    ] + [OpaqueFunction(function=service_caller)]
+)
