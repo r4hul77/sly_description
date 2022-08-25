@@ -1,0 +1,232 @@
+<sdf version='1.7'>
+  <model name='sly'>
+    <link name='base_link'>
+      <inertial>
+        <pose>0.002479 0.004047 0.24906 0 -0 0</pose>
+        <mass>30.583</mass>
+        <inertia>
+          <ixx>0.1451</ixx>
+          <ixy>-1.6457e-05</ixy>
+          <ixz>0.00010762</ixz>
+          <iyy>0.74738</iyy>
+          <iyz>-0.00014219</iyz>
+          <izz>0.73134</izz>
+        </inertia>
+      </inertial>
+      <collision name='base_link_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://sly/meshes/base_link.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='base_link_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://sly/meshes/base_link.STL</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='wheel_joint_0' type='revolute'>
+      <pose relative_to='base_link'>-0.275 0.2 0.20196 -1.5708 0 0</pose>
+      <parent>base_link</parent>
+      <child>wheel_0</child>
+      <axis>
+        <xyz>0 0 -1</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='wheel_0'>
+      <pose relative_to='wheel_joint_0'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>2e-06 -4e-06 0.000139 0 -0 0</pose>
+        <mass>3.3992</mass>
+        <inertia>
+          <ixx>0.058645</ixx>
+          <ixy>5.694e-07</ixy>
+          <ixz>1.0771e-06</ixz>
+          <iyy>0.058645</iyy>
+          <iyz>6.6536e-07</iyz>
+          <izz>0.098484</izz>
+        </inertia>
+      </inertial>
+      <collision name='wheel_0_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://sly/meshes/wheel_0.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='wheel_0_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://sly/meshes/wheel_0.STL</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='wheel_joint_1' type='revolute'>
+      <pose relative_to='base_link'>0.275 0.2 0.20196 -1.5708 0 0</pose>
+      <parent>base_link</parent>
+      <child>wheel_1</child>
+      <axis>
+        <xyz>0 0 -1</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='wheel_1'>
+      <pose relative_to='wheel_joint_1'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.55219 4e-06 -0.39386 0 -0 0</pose>
+        <mass>3.3992</mass>
+        <inertia>
+          <ixx>0.058645</ixx>
+          <ixy>-5.694e-07</ixy>
+          <ixz>-1.0771e-06</ixz>
+          <iyy>0.058645</iyy>
+          <iyz>6.6536e-07</iyz>
+          <izz>0.098484</izz>
+        </inertia>
+      </inertial>
+      <collision name='wheel_1_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://sly/meshes/wheel_1.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='wheel_1_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://sly/meshes/wheel_1.STL</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='wheel_joint_2' type='revolute'>
+      <pose relative_to='base_link'>-0.275 -0.2 0.20196 -1.5708 0 0</pose>
+      <parent>base_link</parent>
+      <child>wheel_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='wheel_2'>
+      <pose relative_to='wheel_joint_2'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0.5522 4e-06 0.000861 0 -0 0</pose>
+        <mass>3.3992</mass>
+        <inertia>
+          <ixx>0.058645</ixx>
+          <ixy>-5.694e-07</ixy>
+          <ixz>-1.0771e-06</ixz>
+          <iyy>0.058645</iyy>
+          <iyz>6.6536e-07</iyz>
+          <izz>0.098484</izz>
+        </inertia>
+      </inertial>
+      <collision name='wheel_2_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://sly/meshes/wheel_2.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='wheel_2_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://sly/meshes/wheel_2.STL</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='wheel_joint_3' type='revolute'>
+      <pose relative_to='base_link'>0.275 -0.2 0.20196 -1.5708 0 0</pose>
+      <parent>base_link</parent>
+      <child>wheel_3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='wheel_3'>
+      <pose relative_to='wheel_joint_3'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>2e-06 -4e-06 0.39386 0 -0 0</pose>
+        <mass>3.3992</mass>
+        <inertia>
+          <ixx>0.058645</ixx>
+          <ixy>5.694e-07</ixy>
+          <ixz>1.0771e-06</ixz>
+          <iyy>0.058645</iyy>
+          <iyz>6.6536e-07</iyz>
+          <izz>0.098484</izz>
+        </inertia>
+      </inertial>
+      <collision name='wheel_3_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://sly/meshes/wheel_3.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='wheel_3_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://sly/meshes/wheel_3.STL</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>
