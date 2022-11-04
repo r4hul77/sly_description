@@ -30,7 +30,6 @@ from launch.substitutions import LaunchConfiguration, PythonExpression
 import subprocess
 import shlex
 import yaml
-import copy
 
 
 def convert_to_robot_config(config):
@@ -43,7 +42,7 @@ def convert_to_robot_config(config):
     
     xml = open(model_path, 'r').read()
 
-    xml = xml.replace('"', '\\"')
+    #xml = xml.replace('"', '\\"')
 
     initial_pose = config['initial_pose']
 
@@ -52,8 +51,7 @@ def convert_to_robot_config(config):
     return {'name': config['name'], 'robot_namespace': robot_namespace, 'xml': xml, 'initial_pose':initial_pose}
 
 def yaml_parser(yaml_file):
-    print(f'Yaml File {yaml_file}')
-    
+   
 
     with open(yaml_file) as f:
 
@@ -134,7 +132,6 @@ def generate_launch_description():
     
     cfg_0 = os.path.join(pkg_skid_gazebo, 'cfg', 'three_robot.yaml')
  
-    robots_to_spawn = LaunchConfiguration('robots_to_spawn')
     robots_to_spawn_arg = DeclareLaunchArgument('robots_to_spawn', default_value=cfg_0, description='Absolute Path to YAML File')
 
 

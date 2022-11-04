@@ -40,3 +40,17 @@
   model_path: 'models/sly/model.sdf'
   robot_namespace: 'sly'
   package_name: 'sly_description'
+- initial_pose:
+    orientation:
+      w: 1
+      x: 0
+      y: 0
+      z: 0
+    position:
+      x: 4
+      y: 4
+      z: 0
+  name: sly_3
+  model_path: 'urdf/sly.urdf'
+  robot_namespace: 'sly'
+  package_name: 'sly_description'
