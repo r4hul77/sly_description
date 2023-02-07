@@ -1,0 +1,14 @@
+- initial_pose:
+    orientation:
+      w: 1
+      x: 0
+      y: 0
+      z: 0
+    position:
+      x: 0
+      y: 0
+      z: 0
+  name: sly_0
+  model_path: 'models/sly/model.sdf'
+  robot_namespace: 'sly'
+  package_name: 'sly_description'

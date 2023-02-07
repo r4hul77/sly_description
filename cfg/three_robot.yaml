@@ -51,6 +51,6 @@
       y: 4
       z: 0
   name: sly_3
-  model_path: 'urdf/sly.urdf'
+  model_path: 'models/sly/model.sdf'
   robot_namespace: 'sly'
   package_name: 'sly_description'
