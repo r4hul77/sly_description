@@ -23,7 +23,7 @@ from launch.actions import DeclareLaunchArgument
 from launch.actions import IncludeLaunchDescription, OpaqueFunction
 from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration, LocalSubstitution, PathJoinSubstitution
+from launch.substitutions import LaunchConfiguration, LocalSubstitution, PathJoinSubstitution, Command
 from launch_ros.actions import Node
 from launch.actions import ExecuteProcess
 from launch.substitutions import LaunchConfiguration, PythonExpression
@@ -121,8 +121,12 @@ def generate_launch_description():
         name='joint_state_publisher'
         )
 
-    with open(os.path.join(pkg_skid_gazebo, "urdf", "sly.urdf"), 'r') as file:
-        robot_desc = file.read() 
+    file = os.path.join(pkg_skid_gazebo, "urdf", "sly_bot.xacro") 
+
+    #with open(os.path.join(pkg_skid_gazebo, "urdf", "sly.urdf"), 'r') as file:
+        #robot_desc = file.read() 
+
+    robot_desc = Command(f'xacro {file}')
 
     robot_state_publisher = Node(
         package='robot_state_publisher',
@@ -160,7 +164,7 @@ def generate_launch_description():
           description='SDF world file'),
         robots_to_spawn_arg,
         rviz_arg,
-        gazebo,
+        #gazebo,
         rviz,
         rqt,
         rqt_reconfig,

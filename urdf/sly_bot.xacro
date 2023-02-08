@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<robot name="sly_bot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find sly_description)/urdf/nav_box.xacro" />
+  <xacro:include filename="$(find sly_description)/urdf/sly.xacro" />
+
+  <!--
+  <xacro:include filename="$(find box_car_description)/robot/box_bot_propeller.xacro" />
+  -->
+  
+  <xacro:sly/>
+
+  
+  <xacro:nav_box_macro parent="base_link" nav_box_name="nav_box" origin_xyz =" ${((17+3)*0.0254)} 0 ${((14+6)*0.0254)}" length="${(12*0.0254)}" width="${(12*0.0254)}" height="${(109*0.0015875)}" rpy="0 1.57 0"/>
+
+
+</robot>

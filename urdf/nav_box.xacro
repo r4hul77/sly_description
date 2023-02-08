@@ -2,36 +2,92 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
     <!-- Caster Wheels-->
-    <xacro:macro  name="nav_box_macro" params="parent nav_box_name origin_xyz roll pitch yaw length width height">
+  <xacro:macro  name="nav_box_macro" params="parent nav_box_name origin_xyz rpy length width height">
       <!-- CASTER FRONT-->
-      <link name="${nav_box_name}_link">
-        <inertial>
-            <mass value="0.001"/>
-            <origin rpy="0 0 0" xyz="0 0 0"/>
-            <inertia ixx="0.001" ixy = "0" ixz="0"
-                     iyy="0.001" iyz= "0"
-                     izz="0.001" />
-          </inertial>
-          <collision name="nav_box_collision">
-            <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
-            <geometry>
-              <box size="${length ${width} ${height}"/>
-            </geometry> 
-          </collision>
-          <visual name="nav_box_visual">
-            <geometry>
-              <box size="${length ${width} ${height}"/>
-            </geometry>  
-          </visual>
-      </link>
+    <link name="${nav_box_name}_link">
+      <inertial>
+          <mass value="0.001"/>
+          <origin rpy="0 0 0" xyz="0 0 0"/>
+          <inertia ixx="0.001" ixy = "0" ixz="0"
+                    iyy="0.001" iyz= "0"
+                    izz="0.001" />
+        </inertial>
+        <collision name="nav_box_collision">
+          <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
+          <geometry>
+            <box size="${length} ${width} ${height}"/>
+          </geometry> 
+        </collision>
+        <visual name="nav_box_visual">
+          <geometry>
+            <box size="${length} ${width} ${height}"/>
+          </geometry>  
+        </visual>
+    </link>
 
-      <joint name="${nav_box_name}_joint" type="fixed">
-        <origin rpy="roll pitch yaw" xyz="${origin_xyz}" />
-        <parent link="${parent}" />
-        <child link="${nav_box_name}_link" />
-        <axis xyz="0 0 1" />
-      </joint>
+    <link name="imu_link">
+      <inertial>
+          <mass value="0.001"/>
+          <origin rpy="0 0 0" xyz="0 0 0"/>
+          <inertia ixx="0.001" ixy = "0" ixz="0"
+                    iyy="0.001" iyz= "0"
+                    izz="0.001" />
+        </inertial>
+        <collision name="nav_box_collision">
+          <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
+          <geometry>
+            <box size="0.0254 0.0254 0.0254"/>
+          </geometry> 
+        </collision>
+        <visual name="nav_box_visual">
+          <geometry>
+            <box size="0.0254 0.0254 0.0254"/>
+          </geometry>  
+        </visual>
+    </link>
+
+
+    <link name="gps_link">
+      <inertial>
+          <mass value="0.001"/>
+          <origin rpy="0 0 0" xyz="0 0 0"/>
+          <inertia ixx="0.001" ixy = "0" ixz="0"
+                    iyy="0.001" iyz= "0"
+                    izz="0.001" />
+        </inertial>
+        <collision name="nav_box_collision">
+          <origin rpy="0 0 0" xyz="0 0 0"/>
+          <geometry>
+            <cylinder radius="0.0254" length="0.0508"/>
+          </geometry> 
+        </collision>
+        <visual name="nav_box_visual">
+          <geometry>
+            <cylinder radius="0.0254" length="0.0508"/>
+          </geometry>  
+        </visual>
+    </link>
+
+    <joint name="${nav_box_name}_joint" type="fixed">
+      <origin rpy="${rpy}" xyz="${origin_xyz}" />
+      <parent link="${parent}" />
+      <child link="${nav_box_name}_link" />
+      <axis xyz="0 0 1" />
+    </joint>
+
+    <joint name="imu_joint" type="fixed">
+      <origin rpy="1.57 0 0" xyz="0.1397 0.088 0.01524" />
+      <parent link="${nav_box_name}_link" />
+      <child link="imu_link" />
+      <axis xyz="0 0 1" />
+    </joint>
+
+    <joint name="gps_joint" type="fixed">
+      <origin rpy="0 1.57 0" xyz="-0.1774 0.1016 0.01524" />
+      <parent link="${nav_box_name}_link" />
+      <child link="gps_link" />
+      <axis xyz="0 0 1" />
+    </joint>
 
   </xacro:macro >
-
 </robot>
